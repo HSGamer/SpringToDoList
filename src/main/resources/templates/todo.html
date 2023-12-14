@@ -3,33 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>To Do List</title>
+    <link href="/pico/css/pico.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>To Do List</h1>
+    <nav class="container">
+        <ul>
+            <li><strong>To Do List</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#todoTable">List</a></li>
+            <li><a href="#todoCreate" role="button">Create</a></li>
+        </ul>
+    </nav>
 
-<form th:action="@{/create}" method="post">
-    <textarea name="content" placeholder="Content"></textarea>
-    <button>Add</button>
-</form>
+<main class="container">
+    <section id="todoCreate" class="container">
+        <form>
+            <textarea id="content" name="content" placeholder="Content" required></textarea>
+            <button formaction="/create" formmethod="post">Create</button>
+            <button formaction="/" class="secondary outline">Search</button>
+        </form>
+    </section>
 
-<form th:action="@{/search}">
-    <input name="content" placeholder="Search" />
-    <button>Search</button>
-</form>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Content</th>
-    </tr>
-    <tr th:each="todo : ${items}">
-        <td th:text="${todo.id}"></td>
-        <td th:text="${todo.content}"></td>
-        <td>
-            <a th:href="@{/delete/{id}(id=${todo.id})}">Delete</a>
-        </td>
-    </tr>
-</table>
-
+    <section id="todoTable" class="container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Content</th>
+            </tr>
+            <tr th:each="todo : ${items}">
+                <td th:text="${todo.id}"></td>
+                <td th:text="${todo.content}"></td>
+                <td>
+                    <a th:href="@{/delete/{id}(id=${todo.id})}">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+</main>
 </body>
 </html>
