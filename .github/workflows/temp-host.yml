@@ -1,12 +1,14 @@
 name: Deploy Temp Host
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      timeout:
+        description: The waiting time before stopping the workflow
+        required: true
 
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
-
-env:
-  TIMEOUT: 2h
 
 jobs:
   deploy:
@@ -16,7 +18,7 @@ jobs:
     steps:
     - uses: Nasfame/github-actions-ngrok@v1.0.0
       with:
-        timeout: ${{ env.TIMEOUT }}
+        timeout: ${{ github.event.inputs.timeout }}
         port: 8080
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
         tunnel_type: http
@@ -26,4 +28,4 @@ jobs:
       run: docker run -d -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
 
     - name: Wait
-      run: sleep ${{ env.TIMEOUT }}
+      run: sleep ${{ github.event.inputs.timeout }}
