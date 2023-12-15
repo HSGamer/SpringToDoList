@@ -1,3 +1,3 @@
-insert into ToDoItem values
-                         ('Finish the Project'),
-                         ('Find a better Server')
+insert into todos values
+                         ('Finish the Project', default),
+                         ('Find a better Server', default)
