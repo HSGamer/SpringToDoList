@@ -10,7 +10,7 @@ jobs:
     - name: Run container
       run: docker run -d -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
     
-    - uses: Nasfame/github-actions-ngrok@<VERSION>
+    - uses: Nasfame/github-actions-ngrok@v1.0.0
       with:
         timeout: 2h
         port: 8080
