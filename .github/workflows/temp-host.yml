@@ -7,9 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run container
-      run: docker run -d -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
-    
     - uses: Nasfame/github-actions-ngrok@v1.0.0
       with:
         timeout: 2h
@@ -17,3 +14,6 @@ jobs:
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
         tunnel_type: http
         save_url_to_filename: tunnelURL.md
+
+    - name: Run container
+      run: docker run -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
