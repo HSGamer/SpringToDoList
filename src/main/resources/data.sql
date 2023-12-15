@@ -1,3 +1,3 @@
-insert into todos values
-                         ('Finish the Project', default),
-                         ('Find a better Server', default)
+insert into todos(content) values
+                         ('Finish the Project'),
+                         ('Find a better Server')
