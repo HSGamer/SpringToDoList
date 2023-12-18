@@ -25,7 +25,4 @@ jobs:
         save_url_to_filename: tunnelURL.md
 
     - name: Run container
-      run: docker run -d -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
-
-    - name: Wait
-      run: sleep ${{ github.event.inputs.timeout }}
+      run: timeout ${{ github.event.inputs.timeout }} docker run -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
