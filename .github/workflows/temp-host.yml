@@ -16,12 +16,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Configure tunnel
+    - name: Run container
+      run: docker run -d -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
+      
+    - id: tunnel
+      name: Configure tunnel
       uses: gabriel-samfira/ngrok-tunnel-action@v1.1
       with:
         port: 8080
         ngrok_authtoken: ${{ secrets.NGROK_AUTHTOKEN }}
         tunnel_type: http
 
-    - name: Run container
-      run: timeout ${{ github.event.inputs.timeout }} docker run -p 8080:8080 ghcr.io/hsgamer/springtodolist:master
+    - name: Print tunnel url
+      run: echo ${{ steps.tunnel.outputs.tunnel-url }}
